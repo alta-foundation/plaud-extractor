@@ -319,23 +319,16 @@ pnpm typecheck
 
 ### Releasing
 
-Releases are fully automated via [semantic-release](https://semantic-release.gitbook.io). Push to `main` and CI handles versioning, tagging, CHANGELOG, and npm publish — no manual steps.
-
-Version bumps are determined by commit message prefixes ([Conventional Commits](https://www.conventionalcommits.org)):
-
-| Prefix | Example | Version bump |
-|---|---|---|
-| `fix:` | `fix: handle missing transcript gracefully` | patch `1.0.x` |
-| `feat:` | `feat: add search filter to MCP list tool` | minor `1.x.0` |
-| `feat!:` or `BREAKING CHANGE:` in footer | `feat!: rename outDir to dataDir` | major `x.0.0` |
-| `chore:`, `docs:`, `ci:`, `refactor:` | `docs: update MCP setup instructions` | no release |
+Publishing is handled by GitHub Actions using [npm Trusted Publishers (OIDC)](https://docs.npmjs.com/trusted-publishers) — no long-lived `NPM_TOKEN` secret required.
 
 ```bash
-# These trigger a release when pushed to main:
-git commit -m "fix: prevent duplicate downloads on retry"
-git commit -m "feat: add plaud_search MCP tool"
+# 1. Bump version (patch / minor / major)
+pnpm version patch   # or: minor, major
 
-# These do not trigger a release:
-git commit -m "chore: update dependencies"
-git commit -m "docs: improve README"
+# 2. Push the commit + tag — CI publishes automatically
+git push --follow-tags
 ```
+
+The `publish.yml` workflow triggers on `v*` tags, runs typecheck + build, then publishes with `--provenance` via OIDC.
+
+**First publish:** if the package has never been published, run `pnpm publish --access public` locally once to create it on npm, then configure the Trusted Publisher in the npm package settings.

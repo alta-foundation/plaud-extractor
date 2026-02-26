@@ -36,4 +36,6 @@ jobs:
         run: pnpm build
 
       - name: Publish
-        run: npm publish --access public --provenance
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken
+          npm publish --access public --provenance

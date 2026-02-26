@@ -1,0 +1,41 @@
+{
+  "name": "@alta-foundation/plaud-extractor",
+  "version": "1.0.0",
+  "description": "Export recordings, transcripts, and metadata from Plaud — SDK + CLI",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "alta-plaud": "./dist/cli/bin.js",
+    "alta-plaud-mcp": "./dist/mcp/server.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx src/cli/bin.ts",
+    "dev:mcp": "tsx src/mcp/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "commander": "^12.1.0",
+    "pino": "^9.5.0",
+    "pino-pretty": "^11.3.0",
+    "playwright": "^1.49.0",
+    "undici": "^6.21.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

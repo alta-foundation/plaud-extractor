@@ -1,0 +1,13 @@
+dist/
+node_modules/
+.env
+*.env.local
+
+# Claude Code local settings (may contain tokens from approved shell commands)
+.claude/
+
+# Auth credentials are stored at ~/.alta/plaud-auth.json (NOT in this repo)
+# Data output is at ~/alta/data/plaud/ (NOT in this repo)
+
+# macOS
+.DS_Store

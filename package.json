@@ -2,6 +2,10 @@
   "name": "@alta-foundation/plaud-extractor",
   "version": "1.0.6",
   "description": "Export recordings, transcripts, and metadata from Plaud — SDK + CLI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alta-foundation/plaud-extractor"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
